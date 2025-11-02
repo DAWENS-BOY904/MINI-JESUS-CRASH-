@@ -140,49 +140,32 @@ _-
 
 ``` DEPLOY ON WORKFLOW ⚡
 
-name: Node.js CI
+name: MINI-JESUS-CRASH Bot CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
   schedule:
-    - cron: '0 */6 * * *'  
+    - cron: '0 */5 * * *'
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [20.x]
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Install FFmpeg
-      run: sudo apt-get install -y ffmpeg
-
-    - name: Start application with timeout
-      run: |
-        timeout 21590s npm start  # Limite l'exécution à 5h 59m 50s
-
-    - name: Save state (Optional)
-      run: |
-        ./save_state.sh
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+          sudo apt update
+          sudo apt install -y ffmpeg
+          npm i
+      - run: timeout 18300s npm run MINI JESUS CRASH
 ```
 
 ## 💗 MINI-JESUS-CRASH Features
